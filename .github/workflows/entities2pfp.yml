@@ -1,0 +1,31 @@
+name: Serialize entity-data to PFP-CIDOC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    name: serialize entity-data to PFP-CIDOC
+    runs-on: ubuntu-latest
+    env:
+      OWNCLOUD_USER: ${{ secrets.OWNCLOUD_USER }}
+      OWNCLOUD_PW: ${{ secrets.OWNCLOUD_PW }}
+      OWNCLOUD_FOLDER: pfp-data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python Packages
+        run: |
+          pip install -r requirements.txt
+      - name: dump the data
+        run: ./scripts/build_graph.sh
+      - name: validate
+        run: ./scripts/validate.sh
+      - name: upload artifact if validate fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation_report
+          path: datasets/validation_report.txt
