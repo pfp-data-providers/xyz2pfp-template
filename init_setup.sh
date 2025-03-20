@@ -47,7 +47,7 @@ find . -type f \
     -exec grep -l "xyz" {} \; | \
 while read file; do
     echo "Processing: $file"
-    sed -i "s/xyz/$REPLACEMENT/g" "$file"
+    sed -i "s@xyz@$REPLACEMENT@g" "$file"
 done
 
 echo "Replacement complete: 'xyz' → '$REPLACEMENT'"
