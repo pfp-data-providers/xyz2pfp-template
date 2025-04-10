@@ -15,3 +15,4 @@ This repo fetches data from the [xyz-entities repo](https://github.com/xyz-proje
 ```shell
 ./init_setup.sh akademie
 ```
+* adapt [scripts/config.py](scripts/config.py)

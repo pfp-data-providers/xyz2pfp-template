@@ -13,10 +13,11 @@ from acdh_xml_pyutils.xml import NSMAP
 from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import RDF
 
+from config import BASE_URL, domain
+
 
 entity_type = "org"
 g = Graph()
-domain = "https://xyz.acdh.oeaw.ac.at/"
 PU = Namespace(domain)
 
 rdf_dir = "./datasets"
@@ -29,7 +30,7 @@ print("check if source file exists")
 if os.path.exists(index_file):
     pass
 else:
-    url = "https://raw.githubusercontent.com/xyz-project/xyz-entities/refs/heads/main/indices/listorg.xml"  # noqa: E501
+    url = f"{BASE_URL}listorg.xml"  # noqa: E501
     print(f"fetching {index_file} from {url}")
     response = requests.get(url)
     with open(index_file, "wb") as file:

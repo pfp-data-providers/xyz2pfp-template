@@ -16,9 +16,10 @@ from acdh_tei_pyutils.utils import get_xmlid
 from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import RDF
 
+from config import BASE_URL, domain
+
 
 g = Graph()
-domain = "https://kaiserin-eleonora.oeaw.ac.at/"
 PU = Namespace(domain)
 
 if os.environ.get("NO_LIMIT"):
@@ -34,7 +35,6 @@ index_file = "./xyz-listperson.xml"
 entity_type = "person"
 
 print("check if source file exists")
-BASE_URL = "https://raw.githubusercontent.com/xyz-project/xyz-entities/refs/heads/main/indices/"  # noqa
 if os.path.exists(index_file):
     pass
 else:
